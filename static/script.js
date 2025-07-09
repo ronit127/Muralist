@@ -65,9 +65,9 @@ async function search_image() {
 
             const img = new Image();
             img.src = proxyUrl + encodeURIComponent(imgUrl);
-            console.error("Error loading image:", img.src);
-            img.style.display = "none"; 
-            img.href = "https://wallhaven.cc/w/" + wallpaper.id;
+            // console.error("Error loading image:", img.src);
+            // img.style.display = "none"; 
+            // img.href = "https://wallhaven.cc/w/" + wallpaper.id;
         };
         
 
