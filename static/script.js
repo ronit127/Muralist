@@ -23,9 +23,9 @@ async function update_image() {
 }
 
 async function search_image() {
-    
+    const theme = document.getElementById("wallpaper_id").value;
     const params = {
-        query: "volcano", // Example search query
+        query: theme, // Example search query
         categories: "111", // Example category (e.g., nature)
         purity: "100", // Example purity (e.g., sfw)
 
@@ -54,23 +54,24 @@ async function search_image() {
         const img = document.createElement("img");
         
         img.alt = "Wallpaper Image";
-        img.src = wallpaper.path;
+      
+       
         img.style.maxWidth = "20%";
         img.style.height = "auto";
         img.style.display = "block";
 
-        img.onerror = function() {
-            const proxyUrl = "https://corsproxy.io/?";
-            const imgUrl = wallpaper.path; 
+        img.onload = () => {
+            document.body.appendChild(img);
+        };
 
-            const img = new Image();
-            img.src = proxyUrl + encodeURIComponent(imgUrl);
-            // console.error("Error loading image:", img.src);
-            // img.style.display = "none"; 
-            // img.href = "https://wallhaven.cc/w/" + wallpaper.id;
+
+        img.onerror = function() {
+            console.warn("Error loading image:", img.src);
+            img.onerror = null;
+            img.src = `/proxyImage?url=${encodeURIComponent(wallpaper.path)}`; // Only use this if things dont work with regular path
         };
         
 
-        document.body.appendChild(img);
+        img.src = wallpaper.path; // Use the path directly
     }
 }

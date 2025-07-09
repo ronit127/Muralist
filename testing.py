@@ -39,11 +39,21 @@ def searchImage():
     url = "https://wallhaven.cc/api/v1/search?" + urllib.parse.urlencode(params)
     response = requests.get(url)
 
-    for wallpaper in response.json()['data']:
-        print(f"ID: {wallpaper['id']}, Path: {wallpaper['path']}\n")
+    print(f"Num wallpapers: {len(response.json()['data'])}")
+    # for wallpaper in response.json()['data']:
+    #     print(f"ID: {wallpaper['id']}, Path: {wallpaper['path']}\n")
    
 
     return jsonify(response.json())
+
+@app.route('/proxyImage')
+def proxy_image():
+    image_url = request.args.get('url')
+    response = requests.get(image_url, stream=True)
+    return response.content, response.status_code, {
+        'Content-Type': response.headers.get('Content-Type', 'image/jpeg'),
+        'Access-Control-Allow-Origin': '*'
+    }
 
 if __name__ == '__main__':
     app.run(debug=True)
