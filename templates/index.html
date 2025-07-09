@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Display Page</title>
+</head>
+<body>
+    <h1>This is the wallpaper display!</h1>
+    <p> Image is here.</p>
+
+    <textarea id="wallpaper_id" rows="4" cols="50" placeholder="Enter your name"></textarea>
+    <button onclick="search_image()">Submit</button>
+
+    <img id="wallpaper" src="2q3tg.PNG" alt="Displayed Image" style="max-width:20%; height:auto;" style="display: none;">
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
