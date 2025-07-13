@@ -25,13 +25,11 @@ async function update_image() {
 async function search_image() {
     const theme = document.getElementById("wallpaper_id").value;
     const params = {
-        query: theme, // Example search query
-        categories: "111", // Example category (e.g., nature)
-        purity: "100", // Example purity (e.g., sfw)
-
-        sorting: "relevance", // Example sorting (e.g., relevance)
-        order: "desc", // Example order (e.g., descending)
-       
+        query: theme, 
+        categories: "111",
+        purity: "100", 
+        sorting: "relevance", 
+        order: "desc", 
     };
     
     const res = await fetch('/searchImages', {
@@ -54,24 +52,14 @@ async function search_image() {
         const img = document.createElement("img");
         
         img.alt = "Wallpaper Image";
-      
+        img.src = `/proxyImage?url=${encodeURIComponent(wallpaper.path)}`
        
         img.style.maxWidth = "20%";
         img.style.height = "auto";
         img.style.display = "block";
-
-        img.onload = () => {
-            document.body.appendChild(img);
-        };
-
-
-        img.onerror = function() {
-            console.warn("Error loading image:", img.src);
-            img.onerror = null;
-            img.src = `/proxyImage?url=${encodeURIComponent(wallpaper.path)}`; // Only use this if things dont work with regular path
-        };
         
-
-        img.src = wallpaper.path; // Use the path directly
+        document.body.appendChild(img);
     }
 }
+
+
